@@ -9,7 +9,7 @@
  ******************************************************************************/
 package Reika.RealBiomes.Biomes;
 
-import Reika.RealBiomes.RealBiomeBase;
+import Reika.RealBiomes.Base.RealBiomeBase;
 
 public class BiomeSahara extends RealBiomeBase {
 

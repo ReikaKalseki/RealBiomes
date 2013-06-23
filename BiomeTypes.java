@@ -16,6 +16,7 @@ import net.minecraft.block.Block;
 import net.minecraft.world.biome.BiomeGenBase;
 import Reika.DragonAPI.Exception.IDConflictException;
 import Reika.DragonAPI.Exception.RegistrationException;
+import Reika.RealBiomes.Base.RealBiomeBase;
 import Reika.RealBiomes.Biomes.BiomeArctic;
 import Reika.RealBiomes.Biomes.BiomeBC;
 import Reika.RealBiomes.Biomes.BiomeSahara;
@@ -82,7 +83,7 @@ public enum BiomeTypes {
 		}
 		catch (InvocationTargetException e) {
 			if (e.getCause() instanceof IllegalArgumentException)
-				throw new IDConflictException(RealBiomes.instance, e.getCause());
+				throw new IDConflictException(RealBiomes.instance, e.getCause().getMessage());
 			else
 				throw new RegistrationException(RealBiomes.instance, biomeClass+"'s threw invocation target exception!");
 		}

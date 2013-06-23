@@ -16,4 +16,6 @@ public class BiomeConfig {
 	public static boolean disableVanillaBiomes = true;
 	public static boolean disableOceans = true;
 
+	public static boolean enable = false;
+
 }

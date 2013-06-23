@@ -42,7 +42,8 @@ public class RealBiomes implements DragonAPIMod {
 
 	@Init
 	public void load(FMLInitializationEvent event) {
-		BiomeLoader.loadBiomes();
+		if (BiomeConfig.enable)
+			BiomeLoader.loadBiomes();
 	}
 
 	@PostInit // Like the modsLoaded thing from ModLoader
