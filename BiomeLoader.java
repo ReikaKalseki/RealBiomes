@@ -10,6 +10,7 @@
 package Reika.RealBiomes;
 
 import net.minecraft.world.biome.BiomeGenBase;
+import Reika.RealBiomes.Registry.OptionRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BiomeLoader {
@@ -19,9 +20,9 @@ public class BiomeLoader {
 			BiomeGenBase biome = BiomeTypes.biomeList[i].create();
 			GameRegistry.addBiome(biome);
 		}
-		if (BiomeConfig.disableOceans)
+		if (OptionRegistry.DISABLEOCEANS.getState())
 			GameRegistry.removeBiome(BiomeGenBase.ocean);
-		if (BiomeConfig.disableVanillaBiomes) {
+		if (OptionRegistry.DISABLEVANILLA.getState()) {
 			GameRegistry.removeBiome(BiomeGenBase.plains);
 			GameRegistry.removeBiome(BiomeGenBase.taiga);
 			GameRegistry.removeBiome(BiomeGenBase.taigaHills);

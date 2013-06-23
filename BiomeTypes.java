@@ -21,6 +21,7 @@ import Reika.RealBiomes.Biomes.BiomeArctic;
 import Reika.RealBiomes.Biomes.BiomeBC;
 import Reika.RealBiomes.Biomes.BiomeSahara;
 import Reika.RealBiomes.Biomes.BiomeToronto;
+import Reika.RealBiomes.Registry.OptionRegistry;
 
 public enum BiomeTypes {
 
@@ -56,7 +57,7 @@ public enum BiomeTypes {
 	public BiomeGenBase create() {
 		try {
 			Constructor c = biomeClass.getConstructor(int.class);
-			BiomeGenBase biome = ((BiomeGenBase)c.newInstance(this.ordinal()+BiomeConfig.biomeIDBase)).setBiomeName(name);
+			BiomeGenBase biome = ((BiomeGenBase)c.newInstance(this.ordinal()+OptionRegistry.BASEID.getValue())).setBiomeName(name);
 			biome.setColor(biomeColor);
 			if (isSnow)
 				biome.setEnableSnow();

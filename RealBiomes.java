@@ -12,6 +12,7 @@ package Reika.RealBiomes;
 import java.net.URL;
 
 import Reika.DragonAPI.Interfaces.DragonAPIMod;
+import Reika.RealBiomes.Registry.OptionRegistry;
 import Reika.RotaryCraft.ClientPackets;
 import Reika.RotaryCraft.ServerPackets;
 import cpw.mods.fml.common.Mod;
@@ -37,12 +38,13 @@ public class RealBiomes implements DragonAPIMod {
 
 	@PreInit
 	public void preload(FMLPreInitializationEvent evt) {
+		BiomeConfig.initProps(evt);
 
 	}
 
 	@Init
 	public void load(FMLInitializationEvent event) {
-		if (BiomeConfig.enable)
+		if (OptionRegistry.ENABLE.getState())
 			BiomeLoader.loadBiomes();
 	}
 
