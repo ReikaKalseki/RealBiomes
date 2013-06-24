@@ -7,7 +7,7 @@
  * Distribution of the software in any form is only allowed with
  * explicit, prior permission from the owner.
  ******************************************************************************/
-package Reika.RealBiomes;
+package Reika.RealBiomes.Registry;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -16,19 +16,57 @@ import net.minecraft.block.Block;
 import net.minecraft.world.biome.BiomeGenBase;
 import Reika.DragonAPI.Exception.IDConflictException;
 import Reika.DragonAPI.Exception.RegistrationException;
+import Reika.RealBiomes.RealBiomes;
 import Reika.RealBiomes.Base.RealBiomeBase;
+import Reika.RealBiomes.Biomes.BiomeAlpine;
+import Reika.RealBiomes.Biomes.BiomeAmazon;
 import Reika.RealBiomes.Biomes.BiomeArctic;
+import Reika.RealBiomes.Biomes.BiomeAussieRiver;
 import Reika.RealBiomes.Biomes.BiomeBC;
+import Reika.RealBiomes.Biomes.BiomeBamboo;
+import Reika.RealBiomes.Biomes.BiomeBayou;
+import Reika.RealBiomes.Biomes.BiomeCoral;
+import Reika.RealBiomes.Biomes.BiomeDeathValley;
+import Reika.RealBiomes.Biomes.BiomeDeepOcean;
+import Reika.RealBiomes.Biomes.BiomeGobi;
+import Reika.RealBiomes.Biomes.BiomeIndoJungle;
+import Reika.RealBiomes.Biomes.BiomeJapan;
+import Reika.RealBiomes.Biomes.BiomeMangrove;
+import Reika.RealBiomes.Biomes.BiomeMarsh;
+import Reika.RealBiomes.Biomes.BiomeMiddleEast;
+import Reika.RealBiomes.Biomes.BiomeMojave;
+import Reika.RealBiomes.Biomes.BiomeOutback;
 import Reika.RealBiomes.Biomes.BiomeSahara;
+import Reika.RealBiomes.Biomes.BiomeSavanna;
+import Reika.RealBiomes.Biomes.BiomeShelf;
+import Reika.RealBiomes.Biomes.BiomeTopicalIsland;
 import Reika.RealBiomes.Biomes.BiomeToronto;
-import Reika.RealBiomes.Registry.OptionRegistry;
 
 public enum BiomeTypes {
 
 	SAHARA(BiomeSahara.class, Block.sand, Block.sand, Block.sandStone, "Sahara Desert", 16421912, false, false),
 	BC(BiomeBC.class, Block.grass, Block.dirt, Block.stone, "Temperate Rainforest", 5470985, false, true),
 	TORONTO(BiomeToronto.class, Block.grass, Block.dirt, Block.stone, "Deciduous Forest", 353825, false, true),
-	ARCTIC(BiomeArctic.class, Block.blockSnow, Block.ice, Block.stone, "Arctic", 16777215, true, false);
+	ARCTIC(BiomeArctic.class, Block.blockSnow, Block.ice, Block.stone, "Arctic", 16777215, true, false),
+	CORAL(BiomeCoral.class, "Coral Reef"),
+	DEEPOCEAN(BiomeDeepOcean.class, "Deep Ocean"),
+	MOJAVE(BiomeMojave.class, "Mojave Desert"),
+	MARSH(BiomeMarsh.class, "Marshland"),
+	ALPINE(BiomeAlpine.class, "Alpine"),
+	AMAZON(BiomeAmazon.class, "Amazon Rainforest"),
+	INDOJUNGLE(BiomeIndoJungle.class, "Indonesian Rainforest"),
+	SAVANNA(BiomeSavanna.class, "Savannah"),
+	MIDDLEEAST(BiomeMiddleEast.class, "?"),
+	BAMBOO(BiomeBamboo.class, "Bamboo Forest"),
+	OUTBACK(BiomeOutback.class, "Australian Outback"),
+	AUSTRARIVER(BiomeAussieRiver.class, "Saltwater River"),
+	GOBI(BiomeGobi.class, "Gobi Desert"),
+	JAPAN(BiomeJapan.class, "?"),
+	TROPICAL(BiomeTopicalIsland.class, "Tropical Island"),
+	CONTSHELF(BiomeShelf.class, "Continental Shelf"),
+	MANGROVE(BiomeMangrove.class, "Mangrove"),
+	BAYOU(BiomeBayou.class, "Bayou"),
+	DEATHVALLEY(BiomeDeathValley.class, "Death Valley");
 
 	private Block topBlock;
 	private Block fillerBlock;
@@ -40,6 +78,19 @@ public enum BiomeTypes {
 	private boolean canRain;
 
 	public static final BiomeTypes[] biomeList = BiomeTypes.values();
+
+	private BiomeTypes(Class<? extends RealBiomeBase> biome, String n) {
+
+		topBlock = Block.grass;
+		fillerBlock = Block.dirt;
+		mainBlock = Block.stone;
+
+		biomeClass = biome;
+		name = n;
+		biomeColor = 0;
+		isSnow = false;
+		canRain = true;
+	}
 
 	private BiomeTypes(Class<? extends RealBiomeBase> biome, Block top, Block filler, Block solid, String n, int color, boolean snow, boolean rain) {
 
@@ -57,7 +108,7 @@ public enum BiomeTypes {
 	public BiomeGenBase create() {
 		try {
 			Constructor c = biomeClass.getConstructor(int.class);
-			BiomeGenBase biome = ((BiomeGenBase)c.newInstance(this.ordinal()+OptionRegistry.BASEID.getValue())).setBiomeName(name);
+			BiomeGenBase biome = ((BiomeGenBase)c.newInstance(this.ordinal()+BiomeOptions.BASEID.getValue())).setBiomeName(name);
 			biome.setColor(biomeColor);
 			if (isSnow)
 				biome.setEnableSnow();

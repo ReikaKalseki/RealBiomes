@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 
 import net.minecraftforge.common.Configuration;
 import Reika.DragonAPI.Libraries.ReikaJavaLibrary;
-import Reika.RealBiomes.Registry.OptionRegistry;
+import Reika.RealBiomes.Registry.BiomeOptions;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class BiomeConfig {
@@ -27,7 +27,7 @@ public class BiomeConfig {
 	private static int readID;
 	private static File configFile;
 
-	public static Object[] controls = new Object[OptionRegistry.optionList.length];
+	public static Object[] controls = new Object[BiomeOptions.optionList.length];
 
 	public static void initProps(FMLPreInitializationEvent event) {
 
@@ -45,12 +45,12 @@ public class BiomeConfig {
 			return;
 		}
 
-		for (int i = 0; i < OptionRegistry.optionList.length; i++) {
-			String label = OptionRegistry.optionList[i].getLabel();
-			if (OptionRegistry.optionList[i].isBoolean())
-				controls[i] = OptionRegistry.optionList[i].setState(config);
-			if (OptionRegistry.optionList[i].isNumeric())
-				controls[i] = OptionRegistry.optionList[i].setValue(config);
+		for (int i = 0; i < BiomeOptions.optionList.length; i++) {
+			String label = BiomeOptions.optionList[i].getLabel();
+			if (BiomeOptions.optionList[i].isBoolean())
+				controls[i] = BiomeOptions.optionList[i].setState(config);
+			if (BiomeOptions.optionList[i].isNumeric())
+				controls[i] = BiomeOptions.optionList[i].setValue(config);
 		}
 
 		/*******************************/

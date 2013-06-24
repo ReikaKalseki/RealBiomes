@@ -14,10 +14,10 @@ import Reika.DragonAPI.Exception.RegistrationException;
 import Reika.RealBiomes.BiomeConfig;
 import Reika.RealBiomes.RealBiomes;
 
-public enum OptionRegistry {
+public enum BiomeOptions {
 
 	ENABLE("Enable Mod", true),
-	DISABLEVANILLA("Disable Vanilla Biomes", false),
+	DISABLEVANILLA("Disable Vanilla Biomes", true),
 	DISABLEOCEANS("Disable Oceans", true),
 	BASEID("Base Biome ID", 120);
 
@@ -26,15 +26,15 @@ public enum OptionRegistry {
 	private int defaultValue;
 	private Class type;
 
-	public static final OptionRegistry[] optionList = OptionRegistry.values();
+	public static final BiomeOptions[] optionList = BiomeOptions.values();
 
-	private OptionRegistry(String l, boolean d) {
+	private BiomeOptions(String l, boolean d) {
 		label = l;
 		defaultState = d;
 		type = boolean.class;
 	}
 
-	private OptionRegistry(String l, int d) {
+	private BiomeOptions(String l, int d) {
 		label = l;
 		defaultValue = d;
 		type = int.class;
