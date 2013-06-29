@@ -11,10 +11,10 @@ package Reika.RealBiomes.Registry;
 
 import net.minecraftforge.common.Configuration;
 import Reika.DragonAPI.Exception.RegistrationException;
-import Reika.RealBiomes.BiomeConfig;
+import Reika.DragonAPI.Interfaces.ConfigRegistry;
 import Reika.RealBiomes.RealBiomes;
 
-public enum BiomeOptions {
+public enum BiomeOptions implements ConfigRegistry {
 
 	ENABLE("Enable Mod", true),
 	DISABLEVANILLA("Disable Vanilla Biomes", true),
@@ -69,11 +69,11 @@ public enum BiomeOptions {
 	}
 
 	public boolean getState() {
-		return (Boolean)BiomeConfig.controls[this.ordinal()];
+		return (Boolean)RealBiomes.config.getControl(this.ordinal());
 	}
 
 	public int getValue() {
-		return (Integer)BiomeConfig.controls[this.ordinal()];
+		return (Integer)RealBiomes.config.getControl(this.ordinal());
 	}
 
 }

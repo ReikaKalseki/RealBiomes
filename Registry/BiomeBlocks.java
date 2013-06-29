@@ -9,7 +9,13 @@
  ******************************************************************************/
 package Reika.RealBiomes.Registry;
 
-public enum BiomeBlocks {
+import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemBlock;
+import Reika.DragonAPI.Interfaces.IDRegistry;
+import Reika.DragonAPI.Interfaces.RegistrationList;
+import Reika.DragonAPI.Libraries.ReikaJavaLibrary;
+
+public enum BiomeBlocks implements RegistrationList, IDRegistry {
 
 	//REGISTER ALL TO OREDICT
 
@@ -62,6 +68,89 @@ public enum BiomeBlocks {
 
 	public String getOreDictName() {
 		return this.name().substring(0, 1)+this.name().substring(1).toLowerCase();
+	}
+
+	@Override
+	public String getConfigName() {
+		return this.getOreDictName();
+	}
+
+	@Override
+	public int getDefaultID() {
+		return 1000;
+	}
+
+	@Override
+	public Class[] getConstructorParamTypes() {
+		return new Class[]{int.class, Material.class};
+	}
+
+	@Override
+	public Object[] getConstructorParams() {
+		return new Object[]{this.getBlockID(), this.getBlockMaterial()};
+	}
+
+	@Override
+	public String getUnlocalizedName() {
+		return ReikaJavaLibrary.stripSpaces(this.getBasicName());
+	}
+
+	@Override
+	public Class getObjectClass() {
+		return null;
+	}
+
+	@Override
+	public String getBasicName() {
+		return this.getOreDictName();
+	}
+
+	@Override
+	public String getMultiValuedName(int meta) {
+		return null;
+	}
+
+	@Override
+	public boolean hasMultiValuedName() {
+		return false;
+	}
+
+	@Override
+	public int getNumberMetadatas() {
+		return 0;
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlock() {
+		return null;
+	}
+
+	@Override
+	public boolean hasItemBlock() {
+		return false;
+	}
+
+	public int getBlockID() {
+		return 0;
+	}
+
+	public Material getBlockMaterial() {
+		return Material.rock;
+	}
+
+	@Override
+	public boolean isBlock() {
+		return true;
+	}
+
+	@Override
+	public boolean isItem() {
+		return false;
+	}
+
+	@Override
+	public String getCategory() {
+		return "Biome Blocks";
 	}
 
 }

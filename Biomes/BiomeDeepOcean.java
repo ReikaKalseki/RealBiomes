@@ -15,6 +15,7 @@ public class BiomeDeepOcean extends RealBiomeBase {
 
 	public BiomeDeepOcean(int par1) {
 		super(par1);
+		this.setMinMaxHeight(-1F, -0.6F);
 	}
 
 }
