@@ -13,6 +13,7 @@ import java.net.URL;
 
 import Reika.DragonAPI.Base.DragonAPIMod;
 import Reika.DragonAPI.Instantiable.ControlledConfig;
+import Reika.DragonAPI.Instantiable.ModLogger;
 import Reika.RealBiomes.Registry.BiomeOptions;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -36,10 +37,13 @@ public class RealBiomes extends DragonAPIMod {
 
 	public static final ControlledConfig config = new ControlledConfig(instance, BiomeOptions.optionList, null, null, null, 0);
 
+	public static ModLogger logger;
+
 	@Override
 	@PreInit
 	public void preload(FMLPreInitializationEvent evt) {
 		config.initProps(evt);
+		logger = new ModLogger(instance, BiomeOptions.LOGLOADING.getState(), BiomeOptions.DEBUGMODE.getState(), false);
 	}
 
 	@Override
@@ -77,6 +81,16 @@ public class RealBiomes extends DragonAPIMod {
 
 	@Override
 	public URL getWiki() {
+		return null;
+	}
+
+	@Override
+	public boolean hasVersion() {
+		return false;
+	}
+
+	@Override
+	public String getVersionName() {
 		return null;
 	}
 }

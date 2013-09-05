@@ -49,7 +49,7 @@ public enum BiomeTypes {
 	TORONTO(BiomeToronto.class, Block.grass, Block.dirt, Block.stone, "Deciduous Forest", 353825, false, true),
 	ARCTIC(BiomeArctic.class, Block.blockSnow, Block.ice, Block.stone, "Arctic", 16777215, true, false),
 	CORAL(BiomeCoral.class, "Coral Reef"),
-	DEEPOCEAN(BiomeDeepOcean.class, "Deep Ocean"),
+	DEEPOCEAN(BiomeDeepOcean.class, Block.sponge, Block.waterMoving, Block.stone, "Deep Ocean", 16777215, false, true),
 	MOJAVE(BiomeMojave.class, "Mojave Desert"),
 	MARSH(BiomeMarsh.class, "Marshland"),
 	ALPINE(BiomeAlpine.class, "Alpine"),

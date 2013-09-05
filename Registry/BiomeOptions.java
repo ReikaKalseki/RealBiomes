@@ -11,19 +11,23 @@ package Reika.RealBiomes.Registry;
 
 import net.minecraftforge.common.Configuration;
 import Reika.DragonAPI.Exception.RegistrationException;
-import Reika.DragonAPI.Interfaces.ConfigRegistry;
+import Reika.DragonAPI.Interfaces.ConfigList;
 import Reika.RealBiomes.RealBiomes;
+import Reika.RotaryCraft.RotaryCraft;
 
-public enum BiomeOptions implements ConfigRegistry {
+public enum BiomeOptions implements ConfigList {
 
 	ENABLE("Enable Mod", true),
 	DISABLEVANILLA("Disable Vanilla Biomes", true),
 	DISABLEOCEANS("Disable Oceans", true),
-	BASEID("Base Biome ID", 120);
+	BASEID("Base Biome ID", 120),
+	LOGLOADING("Console Loading Info", true),
+	DEBUGMODE("Debug Mode", false);
 
 	private String label;
 	private boolean defaultState;
 	private int defaultValue;
+	private float defaultFloat;
 	private Class type;
 
 	public static final BiomeOptions[] optionList = BiomeOptions.values();
@@ -46,6 +50,20 @@ public enum BiomeOptions implements ConfigRegistry {
 
 	public boolean isNumeric() {
 		return type == int.class;
+	}
+
+	public boolean isDecimal() {
+		return type == float.class;
+	}
+
+	public float setDecimal(Configuration config) {
+		if (!this.isDecimal())
+			throw new RegistrationException(RotaryCraft.instance, "Config Property \""+this.getLabel()+"\" is not decimal!");
+		return (float)config.get("Control Setup", this.getLabel(), defaultFloat).getDouble(defaultFloat);
+	}
+
+	public float getFloat() {
+		return (Float)RotaryCraft.config.getControl(this.ordinal());
 	}
 
 	public Class getPropertyType() {
@@ -74,6 +92,10 @@ public enum BiomeOptions implements ConfigRegistry {
 
 	public int getValue() {
 		return (Integer)RealBiomes.config.getControl(this.ordinal());
+	}
+
+	public boolean isDummiedOut() {
+		return type == null;
 	}
 
 }

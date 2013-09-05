@@ -13,7 +13,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import Reika.DragonAPI.Interfaces.IDRegistry;
 import Reika.DragonAPI.Interfaces.RegistrationList;
-import Reika.DragonAPI.Libraries.ReikaJavaLibrary;
+import Reika.DragonAPI.Libraries.Java.ReikaStringParser;
 
 public enum BiomeBlocks implements RegistrationList, IDRegistry {
 
@@ -67,7 +67,7 @@ public enum BiomeBlocks implements RegistrationList, IDRegistry {
 
 
 	public String getOreDictName() {
-		return this.name().substring(0, 1)+this.name().substring(1).toLowerCase();
+		return ReikaStringParser.capFirstChar(this.name());
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public enum BiomeBlocks implements RegistrationList, IDRegistry {
 
 	@Override
 	public String getUnlocalizedName() {
-		return ReikaJavaLibrary.stripSpaces(this.getBasicName());
+		return ReikaStringParser.stripSpaces(this.getBasicName());
 	}
 
 	@Override
@@ -151,6 +151,10 @@ public enum BiomeBlocks implements RegistrationList, IDRegistry {
 	@Override
 	public String getCategory() {
 		return "Biome Blocks";
+	}
+
+	public boolean isDummiedOut() {
+		return false;
 	}
 
 }
