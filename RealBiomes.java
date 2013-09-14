@@ -25,7 +25,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
-@Mod( modid = "RealBiomes", name="RealBiomes", version="beta", certificateFingerprint = "@GET_FINGERPRINT@")
+@Mod( modid = "RealBiomes", name="RealBiomes", version="beta", certificateFingerprint = "@GET_FINGERPRINT@", dependencies="after:DragonAPI")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true/*,
 clientPacketHandlerSpec = @SidedPacketHandler(channels = { "RealBiomesData" }, packetHandler = ClientPackets.class),
 serverPacketHandlerSpec = @SidedPacketHandler(channels = { "RealBiomesData" }, packetHandler = ServerPackets.class)*/)
@@ -42,6 +42,7 @@ public class RealBiomes extends DragonAPIMod {
 	@Override
 	@PreInit
 	public void preload(FMLPreInitializationEvent evt) {
+		config.loadSubfolderedConfigFile(evt);
 		config.initProps(evt);
 		logger = new ModLogger(instance, BiomeOptions.LOGLOADING.getState(), BiomeOptions.DEBUGMODE.getState(), false);
 	}
