@@ -9,9 +9,11 @@
  ******************************************************************************/
 package Reika.RealBiomes;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import Reika.DragonAPI.Base.DragonAPIMod;
+import Reika.DragonAPI.Exception.RegistrationException;
 import Reika.DragonAPI.Instantiable.ControlledConfig;
 import Reika.DragonAPI.Instantiable.ModLogger;
 import Reika.RealBiomes.Registry.BiomeOptions;
@@ -72,7 +74,12 @@ public class RealBiomes extends DragonAPIMod {
 
 	@Override
 	public URL getDocumentationSite() {
-		return null;
+		try {
+			return new URL("http://www.minecraftforum.net/topic/1969694-");
+		}
+		catch (MalformedURLException e) {
+			throw new RegistrationException(instance, "The mod provided a malformed URL for its documentation site!");
+		}
 	}
 
 	@Override
