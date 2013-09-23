@@ -157,4 +157,13 @@ public enum BiomeBlocks implements RegistrationList, IDRegistry {
 		return false;
 	}
 
+	public int getID() {
+		return this.getBlockID();
+	}
+
+	@Override
+	public boolean overwritingItem() {
+		return false;
+	}
+
 }
