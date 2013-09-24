@@ -18,10 +18,8 @@ public class BiomeLoader {
 
 	public static void loadBiomes() {
 		for (int i = 0; i < BiomeTypes.biomeList.length; i++) {
-			if (i == BiomeTypes.DEEPOCEAN.ordinal()) {
-				BiomeGenBase biome = BiomeTypes.biomeList[i].create();
-				GameRegistry.addBiome(biome);
-			}
+			BiomeGenBase biome = BiomeTypes.biomeList[i].getInstance();
+			GameRegistry.addBiome(biome);
 		}
 		if (BiomeOptions.DISABLEOCEANS.getState()) {
 			GameRegistry.removeBiome(BiomeGenBase.ocean);

@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
 import Reika.DragonAPI.Exception.IDConflictException;
 import Reika.DragonAPI.Exception.RegistrationException;
 import Reika.RealBiomes.RealBiomes;
@@ -76,24 +77,16 @@ public enum BiomeTypes {
 	private boolean isSnow;
 	private int biomeColor;
 	private boolean canRain;
+	private BiomeGenBase instance;
+	private BiomeDictionary.Type[] tags;
 
 	public static final BiomeTypes[] biomeList = BiomeTypes.values();
 
-	private BiomeTypes(Class<? extends RealBiomeBase> biome, String n) {
-
-		topBlock = Block.grass;
-		fillerBlock = Block.dirt;
-		mainBlock = Block.stone;
-
-		biomeClass = biome;
-		name = n;
-		biomeColor = 0;
-		isSnow = false;
-		canRain = true;
+	private BiomeTypes(Class<? extends RealBiomeBase> biome, String n, BiomeDictionary.Type... types) {
+		this(biome, Block.grass, Block.dirt, Block.stone, n, 0, false, true, types);
 	}
 
-	private BiomeTypes(Class<? extends RealBiomeBase> biome, Block top, Block filler, Block solid, String n, int color, boolean snow, boolean rain) {
-
+	private BiomeTypes(Class<? extends RealBiomeBase> biome, Block top, Block filler, Block solid, String n, int color, boolean snow, boolean rain, BiomeDictionary.Type... types) {
 		topBlock = top;
 		fillerBlock = filler;
 		mainBlock = solid;
@@ -103,6 +96,22 @@ public enum BiomeTypes {
 		biomeColor = color;
 		isSnow = snow;
 		canRain = rain;
+
+		instance = this.create();
+		tags = types;
+	}
+
+	public BiomeGenBase getInstance() {
+		return instance;
+	}
+
+	public void addTypes() {
+		if (tags == null || tags.length == 0) {
+			BiomeDictionary.makeBestGuess(instance);
+		}
+		else {
+			BiomeDictionary.registerBiomeType(instance, tags);
+		}
 	}
 
 	public BiomeGenBase create() {
