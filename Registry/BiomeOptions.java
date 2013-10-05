@@ -17,8 +17,8 @@ import Reika.RotaryCraft.RotaryCraft;
 
 public enum BiomeOptions implements ConfigList {
 
-	ENABLE("Enable Mod", true),
-	DISABLEVANILLA("Disable Vanilla Biomes", true),
+	ENABLE("Enable Mod", false),
+	DISABLEVANILLA("Disable Vanilla Biomes", false),
 	DISABLEOCEANS("Disable Oceans", true),
 	BASEID("Base Biome ID", 120),
 	LOGLOADING("Console Loading Info", true),
