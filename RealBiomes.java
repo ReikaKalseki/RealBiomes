@@ -17,10 +17,8 @@ import Reika.DragonAPI.Instantiable.ControlledConfig;
 import Reika.DragonAPI.Instantiable.ModLogger;
 import Reika.RealBiomes.Registry.BiomeOptions;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -41,7 +39,7 @@ public class RealBiomes extends DragonAPIMod {
 	public static ModLogger logger;
 
 	@Override
-	@PreInit
+	@EventHandler
 	public void preload(FMLPreInitializationEvent evt) {
 		config.loadSubfolderedConfigFile(evt);
 		config.initProps(evt);
@@ -49,14 +47,14 @@ public class RealBiomes extends DragonAPIMod {
 	}
 
 	@Override
-	@Init
+	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		if (BiomeOptions.ENABLE.getState())
 			BiomeLoader.loadBiomes();
 	}
 
 	@Override
-	@PostInit // Like the modsLoaded thing from ModLoader
+	@EventHandler
 	public void postload(FMLPostInitializationEvent evt) {
 
 	}
