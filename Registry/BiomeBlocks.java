@@ -11,11 +11,10 @@ package Reika.RealBiomes.Registry;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
-import Reika.DragonAPI.Interfaces.IDRegistry;
-import Reika.DragonAPI.Interfaces.RegistrationList;
+import Reika.DragonAPI.Interfaces.RegistryEnum;
 import Reika.DragonAPI.Libraries.Java.ReikaStringParser;
 
-public enum BiomeBlocks implements RegistrationList, IDRegistry {
+public enum BiomeBlocks implements RegistryEnum {
 
 	//REGISTER ALL TO OREDICT
 
