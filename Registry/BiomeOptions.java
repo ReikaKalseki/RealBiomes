@@ -118,4 +118,9 @@ public enum BiomeOptions implements ConfigList {
 		return false;
 	}
 
+	@Override
+	public boolean shouldLoad() {
+		return true;
+	}
+
 }
