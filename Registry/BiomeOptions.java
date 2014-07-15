@@ -20,9 +20,7 @@ public enum BiomeOptions implements ConfigList {
 	ENABLE("Enable Mod", false),
 	DISABLEVANILLA("Disable Vanilla Biomes", false),
 	DISABLEOCEANS("Disable Oceans", true),
-	BASEID("Base Biome ID", 120),
-	LOGLOADING("Console Loading Info", true),
-	DEBUGMODE("Debug Mode", false);
+	BASEID("Base Biome ID", 120);
 
 	private String label;
 	private boolean defaultState;

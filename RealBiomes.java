@@ -44,7 +44,7 @@ public class RealBiomes extends DragonAPIMod {
 	public void preload(FMLPreInitializationEvent evt) {
 		config.loadSubfolderedConfigFile(evt);
 		config.initProps(evt);
-		logger = new ModLogger(instance, BiomeOptions.LOGLOADING.getState(), BiomeOptions.DEBUGMODE.getState(), false);
+		logger = new ModLogger(instance, false);
 
 		this.basicSetup(evt);
 	}
